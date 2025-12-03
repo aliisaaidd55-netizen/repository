@@ -6,7 +6,9 @@ import helmet from "helmet";
 import path from "path";
 import { fileURLToPath } from "url";
 
-
+import statsRoutes from "./routes/stats.routes.js";
+// ...
+app.use("/api/stats", statsRoutes);
 // Routes (ESM import)
 import authRoutes from "./routes/authRoutes.js";
 import chatRoutes from "./routes/chat.routes.js";
