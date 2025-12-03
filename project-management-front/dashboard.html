@@ -472,67 +472,79 @@
             </div>
         </center>
     </div>
+<script>
+// تأكد إن التوكن موجود
+const token = localStorage.getItem("token");
+if (!token) {
+  alert("Please login first");
+  window.location.href = "login.html";
+}
 
-    <script>
-        const sidebar = document.getElementById("sidebar");
-        const toggle = document.getElementById("toggleSidebar");
-        const main = document.getElementById("dashboardMain");
-        const collapseBtn = document.getElementById("collapseSidebar");
-        const navItems = document.querySelectorAll(".nav-item");
-        const logoutSide = document.getElementById("logoutSide");
+// تحديث اسم المستخدم في الـ navbar (لو موجود العنصر ده عندك)
+const userNameElement = document.getElementById("userName");
+if (userNameElement) {
+  userNameElement.textContent = localStorage.getItem("userName") || "User";
+}
 
-        toggle.addEventListener("click", () => {
-            // Open/close sidebar (expanded)
-            sidebar.classList.remove('collapsed');
-            sidebar.classList.toggle("active");
-            // adjust main content shift
-            main.classList.remove('shift-comp');
-            main.classList.toggle("shift");
-        });
+// دالة تحميل الـ Dashboard Stats من الباك إند
+async function loadDashboardStats() {
+  try {
+    const res = await fetch("http://localhost:5000/api/stats/dashboard", {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json"
+      }
+    });
 
-        collapseBtn.addEventListener('click', () => {
-            sidebar.classList.toggle('collapsed');
-            // ensure visible when collapsing
-            sidebar.classList.add('active');
-            if (sidebar.classList.contains('collapsed')) {
-                main.classList.remove('shift');
-                main.classList.add('shift-comp');
-                collapseBtn.innerText = '▶';
-            } else {
-                main.classList.remove('shift-comp');
-                main.classList.add('shift');
-                collapseBtn.innerText = '◀';
-            }
-        });
+    if (!res.ok) throw new Error("Failed to fetch stats");
 
-        // Active link handling
-        navItems.forEach(item => {
-            item.addEventListener('click', (e) => {
-                navItems.forEach(i => i.classList.remove('active'));
-                item.classList.add('active');
+    const data = await res.json();
 
-                // Handle logout trigger if the logout item was clicked
-                if (item.id === 'logoutSide' || item.querySelector('#logoutSide')) {
-                    const logoutBtn = document.getElementById('logoutBtn');
-                    if (logoutBtn) logoutBtn.click();
-                }
-            });
-        });
+    // تحديث الأرقام في الكروت (غيّر الأسماء دي حسب الـ id اللي عندك في الـ HTML)
+    document.getElementById("totalTasks") && (document.getElementById("totalTasks").textContent = data.totalTasks || 0);
+    document.getElementById("todoCount") && (document.getElementById("todoCount").textContent = data.todo || 0);
+    document.getElementById("inProgressCount") && (document.getElementById("inProgressCount").textContent = data.inProgress || 0);
+    document.getElementById("doneCount") && (document.getElementById("doneCount").textContent = data.done || 0);
 
-        // Avatar is populated centrally from assets/js/dashboard.js
+    // تحديث الـ Charts لو موجودة عندك
+    if (window.statusChart) {
+      window.statusChart.data.datasets[0].data = [data.todo, data.inProgress, data.done];
+      window.statusChart.update();
+    }
 
-        // Close sidebar on outside click for small screens
-        document.addEventListener('click', (e) => {
-            const t = e.target;
-            if (!sidebar.contains(t) && !toggle.contains(t)) {
-                if (sidebar.classList.contains('active') && window.innerWidth <= 900) {
-                    sidebar.classList.remove('active');
-                    main.classList.remove('shift', 'shift-comp');
-                }
-            }
-        });
-    </script>
+    if (window.memberChart && data.tasksByUser) {
+      const labels = data.tasksByUser.map(u => u.name || "Unassigned");
+      const counts = data.tasksByUser.map(u => u.count);
 
+      window.memberChart.data.labels = labels;
+      window.memberChart.data.datasets[0].data = counts;
+      window.memberChart.update();
+    }
+
+    // لو عندك جدول الأداء
+    const tableBody = document.getElementById("performanceTable");
+    if (tableBody && data.tasksByUser) {
+      tableBody.innerHTML = data.tasksByUser.map(user => `
+        <tr>
+          <td>${user.name || "غير محدد"}</td>
+          <td>${user.count}</td>
+          <td>${user.completed || 0}</td>
+          <td>${user.inProgress || 0}</td>
+          <td>${user.todo || 0}</td>
+        </tr>
+      `).join("");
+    }
+
+  } catch (err) {
+    console.error("Error loading dashboard:", err);
+    // لو فيه error هيحاول يستخدم dummy data عشان الصفحة متعطلش
+  }
+}
+
+// استدعاء الدالة لما الصفحة تحمل
+window.addEventListener("load", loadDashboardStats);
+</script>
     <script src="assets/js/dashboard.js"></script>
 
 </body>
