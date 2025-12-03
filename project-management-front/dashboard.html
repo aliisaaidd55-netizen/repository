@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+
+    <link rel="stylesheet" href="assets/css/style.css" />
+
+    <style>
+        /* Theme variables: controlled by adding `light` or `dark` class on <body> */
+        :root{
+            --accent: 6, 182, 212; /* rgb parts for glow - cyan */
+            --accent-color: rgb(var(--accent));
+            --text-color: #5eead4;
+            --bg-glass: rgba(0,0,0,0.25);
+            --panel-bg: rgba(15, 118, 110, 0.15);
+            --panel-text: #2dd4bf;
+            --toggle-bg: rgba(6, 182, 212, 0.15);
+            --btn-bg: #0f766e;
+            --btn-text: #d1fae5;
+            --btn-border: #06b6d4;
+        }
+
+        body.light {
+            --text-color: #134e4a;
+            --bg-glass: rgba(209, 250, 229, 0.12);
+            --panel-bg: rgba(236, 253, 245, 0.95);
+            --panel-text: #0f766e;
+            --toggle-bg: rgba(15, 118, 110, 0.06);
+            --btn-bg: #d1fae5;
+            --btn-text: #0f766e;
+            --btn-border: #06b6d4;
+            /* Natural/morning background: soft warm sky into mint-green */
+            background: linear-gradient(135deg, #fffaf0 0%, #f6fff6 25%, #ecfdf5 55%, #d1fae5 85%) !important;
+            background-attachment: fixed !important;
+        }
+
+        body.light #bgVideo {
+            filter: brightness(0.3) opacity(0.4) saturate(0.5);
+        }
+
+        body.dark #bgVideo {
+            filter: brightness(0.25);
+        }
+
+        body.dark {
+            --text-color: #5eead4;
+            --bg-glass: rgba(15, 118, 110, 0.25);
+            --panel-bg: rgba(15, 118, 110, 0.12);
+            --panel-text: #2dd4bf;
+            --toggle-bg: rgba(6, 182, 212, 0.15);
+            --btn-bg: #0f766e;
+            --btn-text: #d1fae5;
+            --btn-border: #06b6d4;
+        }
+
+        body {
+            color: var(--text-color);
+            overflow-x: hidden;
+            animation: fadePage 0.7s ease;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        /* Page transition */
+        @keyframes fadePage {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Glow */
+        .glow-title {
+            text-shadow:
+                0 0 10px rgba(var(--accent),0.6),
+                0 0 20px rgba(var(--accent),0.4),
+                0 0 30px rgba(var(--accent),0.2);
+        }
+
+        /* FULLSCREEN VIDEO BACKGROUND */
+        #bgVideo {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -1;
+            filter: brightness(0.45);
+        }
+
+        /* Toggle Button */
+        #toggleSidebar {
+            font-size: 1.6em;
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            padding: 6px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-right: 16px;
+            transition: 0.2s;
+        }
+
+        #toggleSidebar:hover {
+            transform: scale(1.04);
+        }
+
+        /* Site logo in header */
+        .logo img#siteLogo{
+            height: 40px;
+            width: auto;
+            margin-right: 12px;
+            vertical-align: middle;
+            border-radius: 6px;
+        }
+        .logo .logo-text{ vertical-align: middle; display: inline-block; }
+
+        /* Collapse button inside sidebar */
+        #collapseSidebar {
+            position: absolute;
+            right: 8px;
+            top: 12px;
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 1.05em;
+            z-index: 40;
+            padding: 6px;
+            border-radius: 8px;
+            transition: transform .12s ease, background .12s ease;
+        }
+
+        #collapseSidebar:hover { transform: scale(1.06); background: rgba(255,255,255,0.02); }
+
+        /* Sidebar (enhanced) */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 260px;
+            height: 100vh;
+            background: linear-gradient(180deg, rgba(var(--accent),0.12), rgba(15,118,110,0.06));
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            padding-top: 120px;
+            box-shadow: 0 10px 30px rgba(2,6,23,0.45);
+            transition: left 0.36s cubic-bezier(.2,.9,.2,1), width 0.28s ease, transform 0.28s ease;
+            z-index: 30;
+            border-top-right-radius: 14px;
+            border-bottom-right-radius: 14px;
+            overflow: visible;
+        }
+
+        .sidebar.active { left: 0; }
+
+        /* Collapsed (compact) sidebar */
+        .sidebar.collapsed {
+            width: 82px;
+            left: 0;
+        }
+
+        .side-avatar {
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            width: 100%;
+            pointer-events: none;
+        }
+
+        .avatar-circle {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--btn-bg), var(--btn-border));
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            color: var(--btn-text);
+            font-weight:700;
+            font-size:1.1em;
+            box-shadow: 0 8px 22px rgba(2,6,23,0.5);
+        }
+
+        .avatar-sub {
+            margin-top:8px;
+            font-size:0.85em;
+            color: var(--panel-text);
+            pointer-events: none;
+        }
+
+        .sidebar .nav {
+            list-style: none;
+            padding: 8px 8px 40px 8px;
+            margin: 0;
+        }
+
+        .nav-item {
+            display:flex;
+            align-items:center;
+            gap:12px;
+            padding: 10px 14px;
+            margin: 8px 10px;
+            border-radius: 12px;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: transform .18s ease, background .2s ease, box-shadow .2s ease;
+        }
+
+        .nav-item .icon { font-size: 1.3em; width: 34px; text-align: center; }
+        .nav-item .label { font-size: 1.05em; flex: 1; text-align: left; }
+
+        .nav-item:hover {
+            transform: translateX(6px);
+            background: linear-gradient(90deg, rgba(var(--accent),0.12), rgba(15,118,110,0.06));
+            box-shadow: 0 10px 30px rgba(var(--accent),0.06);
+        }
+
+        .nav-item.active {
+            background: linear-gradient(90deg, rgba(var(--accent),0.16), rgba(15,118,110,0.08));
+            box-shadow: 0 14px 40px rgba(var(--accent),0.08);
+            transform: translateX(6px) scale(1.02);
+        }
+
+        /* Hide labels when collapsed */
+        .sidebar.collapsed .label { display: none; }
+        .sidebar.collapsed .avatar-sub { display: none; }
+
+        /* Logout item styling */
+        #logoutSide {
+            cursor: pointer;
+            color: var(--btn-text);
+            background: linear-gradient(90deg, rgba(6,182,212,0.14), rgba(15,118,110,0.06));
+            margin-top: 18px;
+            padding: 10px 14px;
+            border-radius: 12px;
+            display:flex;
+            align-items:center;
+            gap:10px;
+            justify-content:center;
+        }
+
+        /* Ensure main content shifts appropriately */
+        .dashboard-main.shift { margin-left: 300px; }
+        .dashboard-main.shift-comp { margin-left: 100px; }
+
+        .dashboard-main {
+            transition: margin-left 0.4s ease;
+        }
+
+        .dashboard-main.shift {
+            margin-left: 260px;
+        }
+
+        /* Dashboard Box */
+        .dashboard-container {
+            margin-top: 140px;
+            width: 80%;
+            max-width: 900px;
+            background: var(--panel-bg);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 30px;
+            color: var(--panel-text);
+            box-shadow: 0 5px 25px rgba(0,0,0,0.4);
+            animation: fadeUp 0.8s ease;
+            /* smooth collapse/expand */
+            transition: transform 260ms ease, opacity 260ms ease, padding 260ms ease, margin 260ms ease;
+            transform-origin: top;
+            transform: scaleY(1);
+            opacity: 1;
+        }
+
+        /* Collapsed state for dashboard box */
+        .dashboard-container.collapsed {
+            transform: scaleY(0);
+            opacity: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            margin-top: 0;
+            pointer-events: none;
+        }
+
+        /* Header and logout button positioning */
+        header {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 20px;
+        }
+
+        .logout-btn {
+            width: 130px;
+            height: 50px;
+            padding: 8px 20px;
+            background-color: var(--btn-bg);
+            color: var(--btn-text);
+            outline: none;
+            border: 2px solid var(--btn-border);
+            border-radius: 20px;
+            font-size: 1.05em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: .3s;
+            box-shadow: 0 0 6px rgba(255,255,255,0.12);
+            position: absolute;
+            top: 12px;
+            right: 20px;
+            z-index: 20;
+        }
+
+        .logout-btn:hover{
+            background-color: var(--btn-border);
+            color: var(--btn-bg);
+            border: 2px solid var(--btn-bg);
+            box-shadow:
+                0 0 10px var(--btn-border),
+                0 0 18px var(--btn-border),
+                0 0 28px rgba(255,255,255,0.8),
+                0 0 45px rgba(255,255,255,0.7);
+            transform: scale(1.03);
+        }
+
+        /* Theme toggle button */
+        .theme-toggle {
+            position: absolute;
+            top: 12px;
+            right: 160px;
+            z-index: 21;
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: transparent;
+            color: var(--text-color);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1em;
+            transition: transform .15s ease, background .15s ease;
+        }
+
+        .theme-toggle:hover { transform: scale(1.06); }
+
+        /* Responsive: smaller logout on narrow screens */
+        @media (max-width: 480px) {
+            .logout-btn {
+                width: 100px;
+                height: 40px;
+                font-size: 0.95em;
+                top: 8px;
+                right: 12px;
+            }
+            .theme-toggle { right: 124px; }
+        }
+
+        /* Responsive sidebar and avatar tweaks */
+        @media (max-width: 900px) {
+            .sidebar { width: 220px; padding-top: 100px; }
+            .dashboard-main.shift { margin-left: 220px; }
+            .avatar-circle { width: 56px; height: 56px; font-size: 1em; }
+        }
+
+        @media (max-width: 600px) {
+            .sidebar { left: -260px; }
+            .sidebar.active { left: 0; }
+            .sidebar.collapsed { width: 64px; }
+            .avatar-circle { width: 48px; height: 48px; }
+            .dashboard-container { width: 94%; margin-top: 120px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <video autoplay muted loop id="bgVideo">
+        <source src="assets/videos/0_Office_Workspace_3840x2160.mp4" type="video/mp4">
+    </video>
+
+    <header>
+        <button id="toggleSidebar">☰</button>
+
+        <h2 class="logo glow-title"><img id="siteLogo" src="assets/images/logo.png" alt="Logo"><span class="logo-text">Dashboard</span></h2>
+
+        <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+
+        <button id="logoutBtn" class="login-btn logout-btn">Logout</button>
+    </header>
+
+    <div class="sidebar" id="sidebar" aria-label="Primary navigation">
+        <div class="side-avatar" aria-hidden="true">
+            <div class="avatar-circle" id="sideAvatar">JD</div>
+            <div class="avatar-sub" id="sideName">John Doe</div>
+        </div>
+
+        <button id="collapseSidebar" title="Collapse sidebar" aria-label="Collapse sidebar">◀</button>
+
+        <ul class="nav" role="list">
+            <li>
+                <a href="../taskblitz.html" class="nav-item active" title="Home">
+                    <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z" fill="currentColor" />
+                    </svg>
+                    <span class="label">Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-item" title="Projects">
+                    <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zM13 21h8V11h-8v10zm0-18v6h8V3h-8z" fill="currentColor" />
+                    </svg>
+                    <span class="label">Projects</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-item" title="Tasks">
+                    <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zM3 7h2V5H3v2zm4 8h14v-2H7v2zm0 4h14v-2H7v2zM7 5v2h14V5H7z" fill="currentColor" />
+                    </svg>
+                    <span class="label">Tasks</span>
+                </a>
+            </li>
+            <li>
+                <a href="../Navigation Bar/Account/account.html" class="nav-item" title="Settings">
+                    <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M19.14 12.936a7.992 7.992 0 0 0 0-1.872l2.036-1.58a.5.5 0 0 0 .12-.64l-1.927-3.337a.5.5 0 0 0-.607-.22l-2.4.96a8.12 8.12 0 0 0-1.62-.94l-.36-2.54A.5.5 0 0 0 14.5 2h-4.999a.5.5 0 0 0-.495.428l-.36 2.54a8.12 8.12 0 0 0-1.62.94l-2.4-.96a.5.5 0 0 0-.607.22L2.7 8.844a.5.5 0 0 0 .12.64l2.036 1.58a7.992 7.992 0 0 0 0 1.872L2.82 14.436a.5.5 0 0 0-.12.64l1.927 3.337c.15.26.47.36.737.26l2.4-.96c.5.38 1.05.7 1.62.94l.36 2.54c.06.28.31.48.59.48h4.999c.28 0 .53-.2.59-.48l.36-2.54c.57-.24 1.12-.56 1.62-.94l2.4.96c.266.1.587 0 .737-.26l1.927-3.337a.5.5 0 0 0-.12-.64l-2.04-1.58zM12 15.5A3.5 3.5 0 1 1 12 8.5a3.5 3.5 0 0 1 0 7z" fill="currentColor" />
+                    </svg>
+                    <span class="label">Settings</span>
+                </a>
+            </li>
+            <li>
+                <a id="logoutSide" class="nav-item" title="Logout">
+                    <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M16 13v-2H7V8l-5 4 5 4v-3h9zM20 3h-8v2h8v14h-8v2h8a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z" fill="currentColor" />
+                    </svg>
+                    <span class="label">Logout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="dashboard-main" id="dashboardMain">
+        <center>
+            <div class="dashboard-container">
+
+                <h2 class="glow-title">Welcome, <span id="userName"></span> 👋</h2>
+                <p>Email: <span id="userEmail"></span></p>
+
+                <hr />
+
+                <h3>Your Projects / Tasks (Coming Soon)</h3>
+                <p class="soon-text">We will connect this area to MongoDB soon.</p>
+
+                <hr />
+
+                <h3>Your Projects / Tasks (Coming Soon)</h3>
+                <p class="soon-text">More features will be added here.</p>
+
+                <hr />
+
+                <h3>Your Projects / Tasks (Coming Soon)</h3>
+                <p class="soon-text">Full dashboard system under development.</p>
+
+            </div>
+        </center>
+    </div>
+
+    <script>
+        const sidebar = document.getElementById("sidebar");
+        const toggle = document.getElementById("toggleSidebar");
+        const main = document.getElementById("dashboardMain");
+        const collapseBtn = document.getElementById("collapseSidebar");
+        const navItems = document.querySelectorAll(".nav-item");
+        const logoutSide = document.getElementById("logoutSide");
+
+        toggle.addEventListener("click", () => {
+            // Open/close sidebar (expanded)
+            sidebar.classList.remove('collapsed');
+            sidebar.classList.toggle("active");
+            // adjust main content shift
+            main.classList.remove('shift-comp');
+            main.classList.toggle("shift");
+        });
+
+        collapseBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+            // ensure visible when collapsing
+            sidebar.classList.add('active');
+            if (sidebar.classList.contains('collapsed')) {
+                main.classList.remove('shift');
+                main.classList.add('shift-comp');
+                collapseBtn.innerText = '▶';
+            } else {
+                main.classList.remove('shift-comp');
+                main.classList.add('shift');
+                collapseBtn.innerText = '◀';
+            }
+        });
+
+        // Active link handling
+        navItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                navItems.forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+
+                // Handle logout trigger if the logout item was clicked
+                if (item.id === 'logoutSide' || item.querySelector('#logoutSide')) {
+                    const logoutBtn = document.getElementById('logoutBtn');
+                    if (logoutBtn) logoutBtn.click();
+                }
+            });
+        });
+
+        // Avatar is populated centrally from assets/js/dashboard.js
+
+        // Close sidebar on outside click for small screens
+        document.addEventListener('click', (e) => {
+            const t = e.target;
+            if (!sidebar.contains(t) && !toggle.contains(t)) {
+                if (sidebar.classList.contains('active') && window.innerWidth <= 900) {
+                    sidebar.classList.remove('active');
+                    main.classList.remove('shift', 'shift-comp');
+                }
+            }
+        });
+    </script>
+
+    <script src="assets/js/dashboard.js"></script>
+
+</body>
+</html>

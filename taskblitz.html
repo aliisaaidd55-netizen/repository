@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TaskBlitz | Orchestrate Your Success</title>
+  
+  <link rel="stylesheet" href="taskblitz.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<video autoplay loop muted id="background-video">
+    <source src="270442_medium.mp4" type="video/mp4"> 
+    Your browser does not support the video tag.
+</video>
+
+<div id="main-content">
+    
+    <header>
+      <div class="logo">TaskBlitz</div>
+      <nav>
+        <a href="/project-management-front/dashboard.html">Dashboard</a>
+        <a href="#">Projects</a>
+        <a href="#">Tasks</a>
+        <a href="./Navigation Bar/Account/account.html">Account</a>
+      </nav>
+
+      <div id="dark-mode-container">
+        <span class="shadow">
+            <button type="button" class="switch">
+                <img class="switch__cloud cloud2" src="https://assets.codepen.io/58281/cloud-1.svg" />
+                <img class="switch__cloud cloud1" src="https://assets.codepen.io/58281/cloud-2.svg" />
+
+                <div class="switch__inner">
+                    <div class="switch-globe">
+                        <img class="switch-globe__moon" src="imgs/darck mode/moon.svg" /> 
+                        <div class="switch-globe__circle"></div>
+                    </div>
+                    <img class="switch__stars" src="imgs/darck mode/stars.svg" />
+                </div>
+            </button>
+        </span>
+        <p id="mode-label">dark mode:off</p> 
+      </div>
+      
+      <div class="login-button-wrapper">
+        <a href="/project-management-front/login.html" class="login-btn">logout</a>
+      </div>
+      </header>
+
+    <section class="hero">
+      <h1>Smart Solutions Built for Creative Minds</h1>
+      <p>Your simplest path to project success.</p>
+      <button onclick="startManaging()">Start Managing</button>
+    </section>
+
+    <h2 class="section-title">Core Features</h2>
+    
+    <div class="categories">
+        <a href="core fumctions/timeline-visualization/timeline-visualization.html" class="feature-card">
+            <img src="imgs/Core Features/undraw_time-management_4ss6.svg" alt="Timeline Visualization Image" class="feature-image">
+            <h3 class="feature-title">Timeline Visualization</h3>
+        </a>
+        <a href="core fumctions/team collaboration/team-collaboration.html" class="feature-card">
+            <img src="imgs/Core Features/undraw_teamwork_zplp.svg" alt="Team Collaboration Image" class="feature-image">
+            <h3 class="feature-title">Team Collaboration</h3>
+        </a>
+        
+        </div>
+    
+    <section class="team-section">
+        <h2 class="animated-heading">more about us</h2>
+        <div class="team-cards-container">
+            <div class="profile-card" data-name="Ahmed Saad">
+                <div class="profile-image-container">
+                    <img src="imgs/team imgs/me.jpg" alt="Ahmed Saad's Photo" class="profile-image">
+                    <div class="profile-name-overlay">Ahmed Saad</div>
+                    <div class="social-links hidden">
+                        <a href="#" class="facebook-link" target="_blank" title="Facebook">
+                            <img src="imgs/social media icon/facebook.png" alt="Facebook Logo" class="social-icon facebook-icon">
+                        </a>
+                        <a href="#" class="instagram-link" target="_blank" title="Instagram">
+                            <img src="imgs/social media icon/instagram.webp" alt="Instagram Logo" class="social-icon instagram-icon">
+                        </a>
+                        <a href="https://www.linkedin.com/in/ahmed-saad-890872331/" class="linkedin-link" target="_blank" title="LinkedIn">
+                            <img src="imgs/social media icon/linkedin.png" alt="LinkedIn Logo" class="social-icon linkedin-icon">
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-card" data-name="Ali Said">
+                <div class="profile-image-container">
+                    <img src="imgs/team imgs/ali.jpeg" alt="Ali Said's Photo" class="profile-image">
+                    <div class="profile-name-overlay">Ali Said</div>
+                    <div class="social-links hidden">
+                        <a href="#" class="facebook-link" target="_blank" title="Facebook">
+                            <img src="imgs/social media icon/facebook.png" alt="Facebook Logo" class="social-icon facebook-icon">
+                        </a>
+                        <a href="#" class="instagram-link" target="_blank" title="Instagram">
+                            <img src="imgs/social media icon/instagram.webp" alt="Instagram Logo" class="social-icon instagram-icon">
+                        </a>
+                        <a href="#" class="linkedin-link" target="_blank" title="LinkedIn">
+                            <img src="imgs/social media icon/linkedin.png" alt="LinkedIn Logo" class="social-icon linkedin-icon">
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-card" data-name="Abdul Rahman Hisham">
+                <div class="profile-image-container">
+                    <img src="imgs/team imgs/abdo.jpg" alt="Abdul Rahman Hisham's Photo" class="profile-image">
+                    <div class="profile-name-overlay">Abdul Rahman Hisham</div>
+                    <div class="social-links hidden">
+                        <a href="#" class="facebook-link" target="_blank" title="Facebook">
+                            <img src="imgs/social media icon/facebook.png" alt="Facebook Logo" class="social-icon facebook-icon">
+                        </a>
+                        <a href="#" class="instagram-link" target="_blank" title="Instagram">
+                            <img src="imgs/social media icon/instagram.webp" alt="Instagram Logo" class="social-icon instagram-icon">
+                        </a>
+                        <a href="#" class="linkedin-link" target="_blank" title="LinkedIn">
+                            <img src="imgs/social media icon/linkedin.png" alt="LinkedIn Logo" class="social-icon linkedin-icon">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>© 2025 TaskBlitz — Developed by Alexandria University Students</footer>
+    </section>
+
+</div> 
+<script src="taskblitz.js"></script>
+</body>
+</html>

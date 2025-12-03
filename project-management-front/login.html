@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login page</title>
+    <link rel="stylesheet" href="assets/css/login-style.css">
+</head>
+<body>
+    <video autoplay muted loop id="bgVideoDark" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;">
+        <source src="assets/videos/0_Calendar_Schedule_3840x2160.mp4" type="video/mp4">
+    </video>
+    <video autoplay muted loop id="bgVideoLight" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;">
+        <source src="assets/videos/0_Checklist_To_do_List_3840x2160.mp4" type="video/mp4">
+    </video>
+
+    <header>
+        <h2 class="logo"><img id="siteLogo" src="assets/images/logo.png" alt="Logo"><span class="logo-text">Project</span></h2>
+        <nav class="navigation">
+            <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+            <button onclick="window.location.href='register.html'" class="login-btn">sign in</button>
+        </nav>
+    </header>
+    
+    <div class="wrapper">
+        <div class="form-box login">
+            <header>Welcome Back!</header>
+            <br>
+            <h2>Login</h2>
+            <form action="#">
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                    <input type="email" required title="Enter your email address" >
+                    <label>Email</label>
+                </div>
+               <div class="input-box">
+    <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+    <input id="password" type="password" required aria-label="Password">
+    <span class="toggle-pass" id="togglePass"><ion-icon name="eye-off"></ion-icon></span>
+    <label for="password">Password</label>
+</div>
+
+                <div class="remember-forgot">
+                    <label><input type="checkbox">Remember me</label>
+                    <a href="forgot-password.html">Forgot Password?</a>
+                </div>
+                <button type="submit" class="btn">Login</button>
+                <div class="login-register">
+                    <p>Don't have an account? <a href="register.html" class="register-link">Register</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="assets/js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Timeline | TaskBlitz</title>
+    
+    <link rel="stylesheet" href="../../taskblitz.css" /> 
+    
+    <link rel="stylesheet" href="timeline-visualization.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body class="timeline-page">
+
+<video autoplay loop muted id="background-video">
+    <source src="../../270442_medium.mp4" type="video/mp4"> 
+    Your browser does not support the video tag.
+</video>
+
+<header>
+    <div class="logo">TaskBlitz</div>
+    <nav>
+        <a href="../../taskblitz.html">Home</a> 
+        <a href="../project-setup/landing-page.html">Projects</a>
+        <a href="../timeline-visualization/timeline-visualization.html">Tasks</a>
+        <a href="../../Navigation Bar/account/account.html">Account</a>
+    </nav>
+
+    <div id="dark-mode-container">
+        <span class="shadow">
+            <button type="button" class="switch">
+                <img class="switch__cloud cloud2" src="https://assets.codepen.io/58281/cloud-1.svg" />
+                <img class="switch__cloud cloud1" src="https://assets.codepen.io/58281/cloud-2.svg" />
+
+                <div class="switch__inner">
+                    <div class="switch-globe">
+                        <img class="switch-globe__moon" src="../../imgs/darck mode/moon.svg" /> 
+                        <div class="switch-globe__circle"></div>
+                    </div>
+                    <img class="switch__stars" src="../../imgs/darck mode/stars.svg" />
+                </div>
+            </button>
+        </span>
+        <p id="mode-label">dark mode:off</p> 
+    </div>
+</header>
+
+<div class="timeline-container">
+    <h1 class="page-title">Project Timeline</h1>
+    <p class="subtitle">A visual representation of core milestones and deadlines.</p>
+    
+    <div class="timeline" id="timeline-chart">
+        <p style="text-align: center; color: #5D4037;">Loading project timeline...</p>
+    </div>
+</div>
+
+<script src="../../taskblitz.js"></script>
+<script src="timeline-visualization.js"></script>
+</body>
+</html>

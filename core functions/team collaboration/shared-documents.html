@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shared Documents Hub - TaskBlitz</title>
+    <link rel="stylesheet" href="../../taskblitz.css"> 
+    <link rel="stylesheet" href="shared-documents.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <span>TaskBlitz</span>
+        </div>
+       <nav class="navigation">
+            <a href="../../taskblitz.html">Home</a>
+            <a href="../project-setup/landing-page.html">Projects</a>
+            <a href="../timeline-visualization/timeline-visualization.html">Timeline</a>
+            <a href="team-collaboration.html">Team Collaboration</a>
+        </nav>
+
+        <div id="dark-mode-container">
+            <span class="shadow">
+                <button type="button" class="switch">
+                    <img class="switch__cloud cloud2" src="https://assets.codepen.io/58281/cloud-1.svg" />
+                    <img class="switch__cloud cloud1" src="https://assets.codepen.io/58281/cloud-2.svg" />
+    
+                    <div class="switch__inner">
+                        <div class="switch-globe">
+                            <img class="switch-globe__moon" src="../../imgs/darck mode/moon.svg" /> 
+                            <div class="switch-globe__circle"></div>
+                        </div>
+                        <img class="switch__stars" src="../../imgs/darck mode/stars.svg" />
+                    </div>
+                </button>
+            </span>
+            <p id="mode-label">dark mode:off</p> 
+        </div>
+        <div class="login-button-wrapper">
+            <a href="../../LOGIN/login.html" class="login-btn">Login</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1 class="page-title">Shared Project Documents</h1>
+        <p class="subtitle">Upload, share, and manage project documents in one central hub.</p>
+
+        <section class="shared-documents-section">
+            <div class="upload-area">
+                <label for="file-upload" class="upload-btn">
+                    <span class="icon">📁</span> Upload New File
+                </label>
+                <input type="file" id="file-upload" multiple>
+            </div>
+
+            <div class="file-list-header">
+                <h3>Document Name</h3>
+                <h3>Size</h3>
+                <h3>Uploaded By</h3>
+                <h3>Action</h3>
+            </div>
+
+            <ul id="shared-files-list" class="file-list">
+            </ul>
+        </section>
+
+    </main>
+
+    <script src="../../taskblitz.js"></script>
+    <script src="shared-documents.js"></script> 
+</body>
+</html>

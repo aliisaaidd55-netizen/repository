@@ -1,0 +1,230 @@
+/* Specific styles for the Project Setup Page */
+
+.setup-page {
+    padding-top: 100px; 
+    padding-bottom: 50px; 
+}
+
+.setup-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.page-title {
+    font-size: 3.5em;
+    font-family: 'Playfair Display', serif;
+    color: #3D2B1F; 
+    margin-bottom: 10px;
+}
+body.dark-mode .page-title {
+    color: #FFD700; 
+}
+
+.subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2em;
+    color: #5D4037;
+    margin-bottom: 40px;
+}
+body.dark-mode .subtitle {
+    color: #F0EAD6;
+}
+
+/* ----------------------------------------------------------------- */
+/* --- Form Styling --- */
+/* ----------------------------------------------------------------- */
+
+.project-form {
+    background-color: #FFF8E1; 
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+body.dark-mode .project-form {
+    background-color: #1A1A2E; 
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.1);
+}
+
+fieldset {
+    border: 1px solid #DDAA55;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    text-align: left;
+}
+body.dark-mode fieldset {
+    border-color: #FFD700;
+}
+
+legend {
+    font-weight: 700;
+    font-size: 1.4em;
+    color: #8B4513; 
+    padding: 0 10px;
+}
+body.dark-mode legend {
+    color: #FFD700;
+    background-color: #1A1A2E;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #5D4037;
+}
+body.dark-mode label {
+    color: #F0EAD6;
+}
+
+input[type="text"],
+input[type="date"],
+textarea,
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #C7A34F;
+    border-radius: 6px;
+    box-sizing: border-box; 
+    font-size: 1em;
+    background-color: white;
+    color: #3D2B1F;
+    transition: border-color 0.3s, background-color 0.3s;
+}
+
+body.dark-mode input[type="text"],
+body.dark-mode input[type="date"],
+body.dark-mode textarea,
+body.dark-mode select {
+    background-color: #2D2D44;
+    border-color: #FFD700;
+    color: #F0EAD6;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.date-group {
+    display: flex;
+    gap: 20px;
+}
+
+.date-item {
+    flex: 1;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: #C7A34F; 
+    color: #3D2B1F;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2em;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: #DDAA55;
+}
+
+body.dark-mode .submit-btn {
+    background-color: #FFD700;
+    color: #0A0A1A;
+}
+body.dark-mode .submit-btn:hover {
+    background-color: #F0EAD6;
+}
+
+/* Task List Styling */
+#tasks-list {
+    margin-bottom: 20px;
+}
+
+.task-item {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 10px; 
+}
+.task-item input[type="text"] {
+    flex-grow: 3; 
+}
+.task-item input[type="date"],
+.task-item select {
+    flex-grow: 1;
+}
+
+.add-task-btn {
+    padding: 10px 20px;
+    background: #C7A34F;
+    color: #3D2B1F;
+    border: none;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.3s;
+}
+.add-task-btn:hover {
+    background: #DDAA55;
+}
+body.dark-mode .add-task-btn {
+    background: #FFD700;
+    color: #0A0A1A;
+}
+body.dark-mode .add-task-btn:hover {
+    background: #F0EAD6;
+}
+
+.remove-task-btn {
+    background: #E57373; 
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1em;
+    line-height: 1;
+    transition: opacity 0.3s;
+}
+.remove-task-btn:hover {
+    opacity: 0.8;
+}
+
+/* NEW STYLES for Team Validation */
+.validation-error {
+    color: #E57373; 
+    font-size: 0.9em;
+    display: block;
+    margin-top: 5px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.hint-text {
+    font-size: 0.85em;
+    color: #5D4037;
+    margin-top: -10px;
+    display: block;
+    text-align: left;
+}
+body.dark-mode .hint-text {
+    color: #A9A9A9;
+}
+
+.is-invalid {
+    border-color: #E57373 !important;
+    box-shadow: 0 0 0 0.2rem rgba(229, 115, 115, 0.25);
+}

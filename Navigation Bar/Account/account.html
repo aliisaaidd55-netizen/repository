@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Settings - TaskBlitz</title>
+    <link rel="stylesheet" href="../../taskblitz.css"> 
+    <link rel="stylesheet" href="account.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <span>TaskBlitz</span>
+        </div>
+       <nav class="navigation">
+            <a href="../../taskblitz.html">Home</a>
+            <a href="../../core functions/project-setup/landing-page.html">Projects</a>
+            <a href="../../core functions/timeline-visualization/timeline-visualization.html">Timeline</a>
+            <a href="../../core functions/team collaboration/team-collaboration.html">Team Collaboration</a>
+        </nav>
+
+        <div id="dark-mode-container">
+            <span class="shadow">
+                <button type="button" class="switch">
+                    <img class="switch__cloud cloud2" src="https://assets.codepen.io/58281/cloud-1.svg" />
+                    <img class="switch__cloud cloud1" src="https://assets.codepen.io/58281/cloud-2.svg" />
+    
+                    <div class="switch__inner">
+                        <div class="switch-globe">
+                            <img class="switch-globe__moon" src="../../imgs/darck mode/moon.svg" /> 
+                            <div class="switch-globe__circle"></div>
+                        </div>
+                        <img class="switch__stars" src="../../imgs/darck mode/stars.svg" />
+                    </div>
+                </button>
+            </span>
+            <p id="mode-label">dark mode:off</p> 
+        </div>
+        <div class="login-button-wrapper">
+            <a href="../../LOGIN/login.html" class="login-btn">Login</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1 class="page-title">My Account</h1>
+        <p class="subtitle">Personal and current project information.</p>
+
+        <section class="account-card">
+            <div class="profile-header">
+                <div class="profile-avatar">AA</div> 
+                <h2 id="display-full-name">User Full Name</h2>
+                <p class="username" id="display-username">@userName</p>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="info-label">Current Team:</span>
+                    <span class="info-value" id="display-team">Loading...</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Active Project:</span>
+                    <span class="info-value" id="display-project">Loading...</span>
+                </div>
+                <div class="info-item full-width">
+                    <span class="info-label">Last Activity:</span>
+                    <span class="info-value" id="display-last-login">Loading...</span>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn secondary-btn" id="change-account-btn">Change Account</button>
+                <button class="btn primary-btn logout-btn" id="logout-btn">Log Out</button>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="../../taskblitz.js"></script>
+    <script src="account.js"></script> 
+</body>
+</html>

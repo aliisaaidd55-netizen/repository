@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Setup | TaskBlitz</title>
+  
+  <link rel="stylesheet" href="../../taskblitz.css" /> 
+  <link rel="stylesheet" href="project-setup.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body class="setup-page">
+
+<video autoplay loop muted id="background-video">
+    <source src="../../270442_medium.mp4" type="video/mp4"> 
+    Your browser does not support the video tag.
+</video>
+
+<header>
+    <div class="logo">TaskBlitz</div>
+    <nav>
+        <a href="../../taskblitz.html">Home</a> 
+        <a href="project-setup.html">Projects</a>
+        <a href="#">Tasks</a>
+        <a href="../../Navigation Bar/Account/account.html">Account</a>
+    </nav>
+
+    <div id="dark-mode-container">
+        <span class="shadow">
+            <button type="button" class="switch">
+                <img class="switch__cloud cloud2" src="https://assets.codepen.io/58281/cloud-1.svg" />
+                <img class="switch__cloud cloud1" src="https://assets.codepen.io/58281/cloud-2.svg" />
+
+                <div class="switch__inner">
+                    <div class="switch-globe">
+                        <img class="switch-globe__moon" src="C:\Users\Lenovo\Desktop\web project test d\imgs\darck mode\moon.svg" /> 
+                        <div class="switch-globe__circle"></div>
+                    </div>
+                    <img class="switch__stars" src="C:\Users\Lenovo\Desktop\web project test d\imgs\darck mode\stars.svg" />
+                </div>
+            </button>
+        </span>
+        <p id="mode-label">dark mode:off</p> 
+      </div>
+</header>
+
+<div class="setup-container">
+    <h1 class="page-title">Project Setup</h1>
+    <p class="subtitle">Define your project parameters and core team before you begin.</p>
+
+    <form id="project-setup-form" class="project-form">
+        
+        <fieldset>
+            <legend>1. Project Details</legend>
+            <div class="input-group">
+                <label for="project-title">Project Title:</label>
+                <input type="text" id="project-title" name="project-title" placeholder="e.g., Mobile App Redesign" required>
+            </div>
+            
+            <div class="input-group">
+                <label for="project-desc">Project Description:</label>
+                <textarea id="project-desc" name="project-desc" rows="4" placeholder="Briefly describe the project's goals and scope." required></textarea>
+            </div>
+
+            <div class="date-group">
+                <div class="input-group date-item">
+                    <label for="start-date">Start Date:</label>
+                    <input type="date" id="start-date" name="start-date" required>
+                </div>
+                <div class="input-group date-item">
+                    <label for="end-date">Due Date (Timeline End):</label> 
+                    <input type="date" id="end-date" name="due-date">
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>1B. Create New Team</legend>
+            <div class="input-group">
+                <label for="team-name">Team Name:</label>
+                <input type="text" id="team-name" name="team-name" placeholder="Enter a unique team name" required>
+                <small id="team-name-error" class="validation-error"></small>
+            </div>
+            <div class="input-group">
+                <label for="team-code">Team Code:</label>
+                <input type="text" id="team-code" name="team-code" placeholder="Enter a unique code (e.g., A1B2C3)" required pattern="[a-zA-Z0-9]{4,10}" maxlength="10">
+                <small id="team-code-error" class="validation-error"></small>
+                <small class="hint-text">4-10 characters, letters and numbers only.</small>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>2. Initial Core Tasks</legend>
+            <div id="tasks-list">
+                <div class="task-item">
+                    <input type="text" placeholder="Task Title (e.g., Define Wireframes)" required>
+                    <input type="date" title="Due Date" required>
+                    <select title="Priority">
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                    </select>
+                    <button type="button" class="remove-task-btn">✖</button>
+                </div>
+                </div>
+            <button type="button" id="add-task-button" class="add-task-btn">+ Add Task/Milestone</button>
+        </fieldset>
+
+        <fieldset>
+            <legend>3. Project Files & Assets</legend>
+            <label for="project-files">Upload Documents/Design Assets (Optional):</label>
+            <input type="file" id="project-files" name="project-files" multiple>
+        </fieldset>
+        
+        <button type="submit" class="submit-btn">Create Project and Proceed to Dashboard</button>
+    </form>
+</div>
+
+<script src="../../taskblitz.js"></script>
+<script src="project-setup.js"></script>
+</body>
+</html>

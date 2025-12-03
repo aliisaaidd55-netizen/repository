@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Selection | TaskBlitz</title>
+    <link rel="stylesheet" href="../../taskblitz.css"> 
+    <link rel="stylesheet" href="landing-page.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body class="landing-page-body">
+
+    <header class="header">
+        <div class="logo">
+            <span>TaskBlitz</span>
+        </div>
+        
+       <nav class="navigation">
+            <a href="../../taskblitz.html">Home</a>
+        </nav>
+
+        <div id="dark-mode-container">
+        </div>
+    </header>
+
+    <main class="container landing-container">
+        <h1 class="page-title">Project Access</h1>
+        <p class="subtitle">Choose an option to manage your projects or teams.</p>
+
+        <section class="option-cards">
+            <div class="option-card" id="join-team-card">
+                <div class="icon-placeholder">🔗</div>
+                <h2>Join Existing Project</h2>
+                <p>Enter your team's unique code to gain access to a current project and start collaborating.</p>
+                <button class="btn primary-btn" id="show-join-form-btn">Join Project</button>
+            </div>
+
+            <div class="option-card" id="create-project-card">
+                <div class="icon-placeholder">✨</div>
+                <h2>Create New Project</h2>
+                <p>Initiate a new project from scratch and set up your dedicated workspace and team details.</p>
+                <a href="project-setup.html" class="btn secondary-btn">Start Setup</a>
+            </div>
+        </section>
+
+        <div id="join-team-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <h3>Enter Project Access Code</h3>
+                <form id="join-team-form">
+                    <div class="input-group">
+                        <label for="team-code-input">Access Code:</label>
+                        <input type="text" id="team-code-input" placeholder="e.g., TBX-101" required>
+                        <small id="join-code-error" class="validation-error"></small>
+                    </div>
+                    <button type="submit" class="btn primary-btn">Go to Project</button>
+                </form>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="../../taskblitz.js"></script>
+    <script src="landing-page.js"></script>
+</body>
+</html>

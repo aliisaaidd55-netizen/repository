@@ -1,0 +1,273 @@
+/* Specific styles for the Timeline Visualization Page */
+
+/* Container and Titles */
+.timeline-page {
+    /* Ensure the body styles from taskblitz.css are applied first */
+    padding-top: 100px; /* Space for the fixed header */
+    padding-bottom: 50px; 
+}
+
+.timeline-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.page-title {
+    font-size: 3.5em;
+    font-family: 'Playfair Display', serif;
+    color: #3D2B1F; /* Primary Dark Color */
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode .page-title {
+    color: #FFD700; /* Dark Mode Gold */
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+}
+
+.subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2em;
+    color: #5D4037; /* Secondary Dark Color */
+    margin-bottom: 50px;
+}
+
+body.dark-mode .subtitle {
+    color: #F0EAD6; /* Dark Mode Light Text */
+}
+
+/* ----------------------------------------------------------------- */
+/* --- Timeline Structure --- */
+/* ----------------------------------------------------------------- */
+
+.timeline {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* The central vertical line (axis) */
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 3px;
+    background-color: #C7A34F; /* Gold Accent */
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -1.5px;
+    transition: background-color 0.5s;
+}
+
+body.dark-mode .timeline::after {
+    background-color: #FFD700;
+}
+
+
+/* Individual Timeline Items */
+.timeline-item {
+    padding: 10px 40px;
+    position: relative;
+    width: 50%;
+    box-sizing: border-box;
+}
+
+/* Left side items */
+.left {
+    left: 0;
+    text-align: right;
+}
+
+/* Right side items */
+.right {
+    left: 50%;
+    text-align: left;
+}
+
+/* Indicator Circle (dot) on the axis */
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    right: -17px;
+    background-color: #FFF; /* Light background for visibility */
+    border: 4px solid #C7A34F;
+    top: 15px;
+    border-radius: 50%;
+    z-index: 1;
+    transition: border-color 0.5s, background-color 0.5s;
+}
+
+body.dark-mode .timeline-item::after {
+    background-color: #1A1A30; 
+    border-color: #FFD700;
+}
+
+/* Position the circles for left/right items */
+.left::after {
+    right: -10px;
+}
+
+.right::after {
+    left: -10px;
+}
+
+/* Item content box */
+.timeline-content {
+    padding: 20px 30px;
+    background-color: #FFF8E1; /* Light paper tone */
+    position: relative;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid #C7A34F;
+    transition: background-color 0.5s, border-color 0.5s, box-shadow 0.3s;
+}
+
+.timeline-item:hover .timeline-content {
+    box-shadow: 0 6px 15px rgba(199, 163, 79, 0.4);
+    transform: translateY(-2px);
+}
+
+body.dark-mode .timeline-content {
+    background-color: #1A1A30; /* Surrounding dark color */
+    border-color: #3A3A50;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Arrow pointer on content box */
+.timeline-content::before {
+    content: '';
+    position: absolute;
+    top: 22px;
+    width: 0;
+    height: 0;
+    border: medium solid;
+    border-width: 10px 10px 10px 0;
+    border-color: transparent #FFF8E1 transparent transparent;
+    transition: border-color 0.5s;
+}
+
+/* Position the arrow for left/right items */
+.left .timeline-content::before {
+    right: -10px;
+}
+
+.right .timeline-content::before {
+    left: -10px;
+    border-width: 10px 0 10px 10px;
+    border-color: transparent transparent transparent #FFF8E1;
+}
+
+body.dark-mode .left .timeline-content::before {
+    border-color: transparent #1A1A30 transparent transparent;
+}
+
+body.dark-mode .right .timeline-content::before {
+    border-color: transparent transparent transparent #1A1A30;
+}
+
+
+/* Timeline Content Details */
+.timeline-content h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5em;
+    color: #3D2B1F;
+    margin-top: 0;
+}
+body.dark-mode .timeline-content h2 {
+    color: #FFD700;
+}
+
+.timeline-content p {
+    font-family: Arial, sans-serif;
+    font-size: 0.95em;
+    color: #555;
+    line-height: 1.6;
+}
+body.dark-mode .timeline-content p {
+    color: #A0A0A0;
+}
+
+.timeline-content .date {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.9em;
+    color: #C7A34F;
+    margin-bottom: 5px;
+}
+body.dark-mode .timeline-content .date {
+    color: #FFD700;
+}
+
+/* Priority Tags */
+.tag {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-size: 0.8em;
+    font-weight: 700;
+    margin-top: 10px;
+}
+
+.high-priority {
+    background-color: #E57373;
+    color: white;
+}
+
+.medium-priority {
+    background-color: #FFB74D;
+    color: #3D2B1F;
+}
+
+.low-priority {
+    background-color: #81C784;
+    color: #3D2B1F;
+}
+
+.complete {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* ----------------------------------------------------------------- */
+/* --- Mobile Responsive Styles --- */
+/* ----------------------------------------------------------------- */
+@media screen and (max-width: 600px) {
+    /* Stack all items vertically */
+    .timeline::after {
+        left: 31px; /* Move vertical line to the left */
+    }
+
+    .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+    }
+
+    /* Adjust left/right items to align on the left */
+    .left, .right {
+        left: 0;
+        text-align: left;
+    }
+    
+    /* Move the circle dot next to the line */
+    .left::after, .right::after {
+        left: 22px;
+    }
+    
+    /* Correct the arrow on the content box to point to the left */
+    .left .timeline-content::before, .right .timeline-content::before {
+        left: 56px;
+        right: auto;
+        border-width: 10px 10px 10px 0;
+        border-color: transparent #FFF8E1 transparent transparent;
+    }
+    
+    body.dark-mode .left .timeline-content::before, 
+    body.dark-mode .right .timeline-content::before {
+        border-color: transparent #1A1A30 transparent transparent;
+    }
+}
